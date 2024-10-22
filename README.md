@@ -28,14 +28,14 @@ Database Explorer - Adatnézegető
 Database Builder - Adatbázis szerkesztő
 
 Alkalmazás készítés lépései:
-● Workspace létrehozás 
-● Adatbázisok definiálása
-● Adatelem-szótárak kidolgozása
-● Egyszerű adatkezelési felületek készítése
-● Összetettebb adatkezelési felületek készítése
-● Batch eljárások készítése
-● Csinosítás
-● Riportok, lekérdezések készítése
+- Workspace létrehozás 
+- Adatbázisok definiálása
+- Adatelem-szótárak kidolgozása
+- Egyszerű adatkezelési felületek készítése
+- Összetettebb adatkezelési felületek készítése
+- Batch eljárások készítése
+- Csinosítás
+- Riportok, lekérdezések készítése
 
 Workspace:
 Munkaterület, amely összefogja az alkalmazásunk összes elemét (.sws, .sw)

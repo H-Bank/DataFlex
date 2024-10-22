@@ -50,10 +50,10 @@ Munkaterület, amely összefogja az alkalmazásunk összes elemét (.sws, .sw)
 - Programs (Futtatható progamok, ws, dll fájlok)
 
 Fontos nyelvi szabályok:
-● Sorok végén nincs semmi
-● Nem case sensitive
-● Típus meghatározásnál nem adunk meg értéket
-● Több változót is megadhatok egy sorban
-● Értékadás: move „érték” to valtozo
-● Nem a matematikai precedencia szerint értékeli ki a művelteket /(1+4*2)=10 és nem 9/ -> Zárójeleket használjunk
-● Logikai kifejezés kiértékelése
+- Sorok végén nincs semmi
+- Nem case sensitive
+- Típus meghatározásnál nem adunk meg értéket
+- Több változót is megadhatok egy sorban
+- Értékadás: move „érték” to valtozo
+- Nem a matematikai precedencia szerint értékeli ki a művelteket /(1+4*2)=10 és nem 9/ -> Zárójeleket használjunk
+- Logikai kifejezés kiértékelése

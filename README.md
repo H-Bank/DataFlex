@@ -23,9 +23,9 @@ Objektum-Orientált programozási nyelv
 - Makró struktúra: Fordítás nélküli módosítás
 
 Eszközök:
-Studio - Alkalmazás jészítés
-Database Explorer - Adatnézegető
-Database Builder - Adatbázis szerkesztő
+- Studio: Alkalmazás készítés
+- Database Explorer: Adatnézegető
+- Database Builder: Adatbázis szerkesztő
 
 Alkalmazás készítés lépései:
 - Workspace létrehozás 

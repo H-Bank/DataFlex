@@ -58,6 +58,94 @@ Fontos nyelvi szabályok:
 - Nem a matematikai precedencia szerint értékeli ki a művelteket /(1+4*2)=10 és nem 9/ -> Zárójeleket használjunk
 - Logikai kifejezés kiértékelése
 
+###Adatbázisok
+Fogalmak:
+- Relációs adatmodell | Logikai adatmodell, legfontosabb eleme a matematikai reláció
+- Tábla | Táblában tároljuk az adatokat. Azonos sorok, különböző oszlopok
+- Nézet | Állandósított lekérdezés – tábla, vagy táblák oszlopai
+- Index | Gyors keresést lehetővé tevő tábla – oszlop, vagy oszlopok
+- Kényszer | (Constrain) – korlátozó szabály, adathalmazt ír le
+- Trigger | Eseményre adott automatikus válasz
+- Kulcs | A rekordok egyediségét biztosítja – 1 elemű
+- Összetett kulcs | A rekordok egyediségét biztosítja – több elemű
+- Külső kulcs | Másik tábla elsődleges kulcsára hivatkozik
+
+Loundry Share App
+"A város különböző pontjain elhelyezett, önkiszolgáló rendszerben működő mosodai szolgáltató cég"
+- Több telephely
+- Különböző gépek (mosó, szárító, töltési súly)
+- Bérlés problémája – foglalás - elszámolás
+Cél:
+- Kihasználtság maximalizálása
+- Optimális karbantartási időszak
+- Akciók 
+- Cash-Flow
+- Bővülés
+
+Funkcionális függőség:
+Két mező viszonya. Az „A” mező funkcionálisan függ „B ” mezőtől, ha a „B” mező értéke egyértelműen meghatározza „A” mező értékét.
+
+Teljes funkcionális függőség:
+- Egy tábla minden nem kulcs mezője függjön a kulcs mezőtől
+- Minden, nem kulcs mező csak a kulcstól függjön
+- Összetett kulcs esetén, minden nem kulcs mező függjön a kulcs minden elemétől
+
+Részleges funkcionális függőség (CSAK):
+- Teljes funkcionális függőség akadálya
+- Összetett kulcs esetén fordulhat elő
+- És nem teljesül a teljes funkcionális függőség 3. pontja: „Összetett kulcs esetén, minden nem kulcs mező függjön a kulcs minden elemétől”
+
+Tranzitív függőség (IS):
+- Minden nem kulcs mező függ a kulcstól
+- Van olyan mező, ami nem csak a kulcstól függ
+
+Normálformák – 1NF:
+- Minden rekord különbözik
+- A mezők száma és sorrendje azonos
+- Nincsenek többértékű mezők
+
+Normálformák – 2NF:
+N:M kapcsolatok felbontása 
+- A táblánk 1NF-ben legyen
+- Részleges funkcionális függőségek megszüntetése – CSAK függőségek megszüntetése
+
+Normálformák – 3NF:
+- A tábla 2NF-ben legyen
+- Tranzitív függőségek megszüntetése – IS függőségek megszüntetése
+
+Adatbázis tábla létrehozás:
+1. Create New Table: Studio – Table Explorer
+2. Tábla sorszáma - neve: + Adabázis típusa
+3. Oszlopok: Név, típus, méret, saját index
+4. Index(ek)
+5. Reláció(k): Adattáblák közötti kapcsolat
+
+Data Dictionary – Adatelem-szótár:
+- Adatbázis tábla tulajdonságainak kiterjesztése
+- Adatok védelme
+- Összefogja az üzleti szabályokat
+- Minden táblához tartozhat adatelemszótár (több is)
+- Osztályként kerül definiálásra
+
+Adatbázisok --> Adatelem-szótárak --> Alkalmazás megjelenítési felülete
+
+Tranzakciók:
+Tranzakció indítása --> Adatok táblaszintű, vagy rekord szintű lokkolása --> Adatok ellenőrzése, feldolgozása és adatbázis mezők frissítése --> Van hiba?
+
+Hiba:
+Metódus megáll , tranzakció visszavonás --> Lokkolás megszűnik --> Hibaüzenet --> Err indikátor = True
+
+Nincs hiba:
+Metódus végigmegy --> Tranzakció végrehajtása --> Lokkolás megszűnik --> Err indikátor = False
+
+Típusok:
+- Insert
+- Update
+- Delete
+
+
+
+##Gyakorlat
 Változók definiálása:
 - String sName sCity sZipCode | Karaktereket tartalmazó változók
 - Number nErtek | Lebegőpontos számok

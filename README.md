@@ -256,18 +256,18 @@ Dynamic AI:
 - Monitorozás, automatizálás
 
 WinPrint lista szekciók:
-Page_Top | Minden listában | Minden oldal tetején megjelenik
-Report_Header | Minden listában | Lista elején 1x jelenik csak meg
-Page_Title | Minden listában | Minden oldalon a Page_Top után jelenik meg
-SubHeader_Ini1…N | Csoportosítás esetén | A csoportosított elemek első előfordulásakor, minden listában csak 1x (töréspont)
-Sub_Header1…N | Csoportosítás esetén | A csoportosított elemek első előfordulásakor (töréspont)
-Body | Minden listában | Elemek részletes listája, minden rekord esetén
-Sub_Total1…N | Csoportosítás esetén | A csoportosított elemek utolsó előfordulásakor, összeg képzés
-Total | Csoportosítás esetén | A lista utolsó eleme után, végösszesen képzés, utolsó Sub_Total után
-Page_Total | Csoportosítás esetén | Oldaldobás előtt, összegzés
-Page_Footer | Minden listában | Minden oldal alján, az utolsó oldalon a Page_Total után
-Report_Footer | Minden listában | Listánként csak 1x, az utolsó odalon Page_Total után
-Page_Bottom | Minden listában | Minden oldalon a záró elem
+| Page_Top | Minden listában | Minden oldal tetején megjelenik |
+| Report_Header | Minden listában | Lista elején 1x jelenik csak meg |
+| Page_Title | Minden listában | Minden oldalon a Page_Top után jelenik meg |
+| SubHeader_Ini1…N | Csoportosítás esetén | A csoportosított elemek első előfordulásakor, minden listában csak 1x (töréspont) |
+| Sub_Header1…N | Csoportosítás esetén | A csoportosított elemek első előfordulásakor (töréspont) |
+| Body | Minden listában | Elemek részletes listája, minden rekord esetén |
+| Sub_Total1…N | Csoportosítás esetén | A csoportosított elemek utolsó előfordulásakor, összeg képzés |
+| Total | Csoportosítás esetén | A lista utolsó eleme után, végösszesen képzés, utolsó Sub_Total után |
+| Page_Total | Csoportosítás esetén | Oldaldobás előtt, összegzés |
+| Page_Footer | Minden listában | Minden oldal alján, az utolsó oldalon a Page_Total után |
+| Report_Footer | Minden listában | Listánként csak 1x, az utolsó odalon Page_Total után |
+| Page_Bottom | Minden listában | Minden oldalon a záró elem |
 
 
 

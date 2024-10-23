@@ -393,5 +393,226 @@ Function Name {Global | Desktop} Returns Type
 End_function
 ```
 
+### Órai feladatok:
+Eljárások:
+```
+Use DfAllEnt.pkg
+
+Function MultiplyByFive Integer iVal Returns Integer
+    Function_Return (iVal*5)
+End_Function
+
+Procedure UpperDesc String ByRef sDesc
+    Move (Uppercase(sDesc)) to sDesc
+End_Procedure
+
+Procedure Feladat Integer iNum String sDesc
+    Get MultiplyByFive iNum to iNum
+    Move (MultiplyByFive(Self,iNum)) to iNum
+    Send UpperDesc (&sDesc)
+    Send Info_Box (SFormat("Feladat: %1, %2",iNum,sDesc)) "Hello"
+End_Procedure
+
+Send Feladat 4 "Valami"
+Send Feladat 12 "Valami más"
+```
+
+Változók:
+```
+Use DfAllEnt.pkg //fontos!!!
+
+Procedure Valtozok
+    String sText
+    
+    Move "Hello változók" to sText
+    
+    Send Info_Box sText "Üzenet"
+End_Procedure
+
+Send Valtozok
+```
+
+Tömbök:
+```
+Use DfAllEnt.pkg
+
+Procedure DemoArray
+    String[] aNames
+    Integer iIndex
+    
+    Move "John" to aNames[0]
+    Move "Stephen" to aNames[1]
+    Move "Nick" to aNames[2]
+    Move "Harm" to aNames[3]
+    
+    Move (SortArray(aNames)) to aNames
+    
+    For iIndex from 0 to (SizeOfArray(aNames)-1)
+        Showln aNames[iIndex]
+    Loop
+    Move (SearchArray("Nick",aNames)) to iIndex
+    Showln (String(iIndex)+".elem a tömbben.")
+    
+End_Procedure
+
+Procedure MultiDimArray
+    String[][] aaGrid
+    String sResult
+    Integer iX iY
+    
+    For iX from 0 to 4
+        For iY from 0 to 4
+            Move (Character(ix+65)+"."+String(iY)) to aaGrid[iX][iY]
+        Loop
+    Loop
+    
+    For iX from 0 to (SizeOfArray(aaGrid)-1)
+        Move "" to sResult
+        For iY from 0 to (SizeOfArray(aaGrid[iX])-1)
+            Move (sResult+" "+aaGrid[iX][iY]) to sResult
+        Loop
+        Showln sResult
+    Loop
+    
+End_Procedure
+
+//Send DemoArray
+Send MultiDimArray
+Send Info_Box "Kész" 
+```
+
+Struct (Rekord):
+```
+Use DfAllEnt.pkg
+Use cJsonObject.pkg
+
+Struct stOrder
+    Integer iId
+    Date dDate
+    Number nTotal
+End_Struct
+
+Struct stCustomer
+    Integer iId
+    String sName
+    String sCity
+    stOrder[] aOrders
+End_Struct
+
+Procedure DisplayCust stCustomer tCust
+    String sResult
+    Handle hoJson
+    
+    Get Create (RefClass(cJsonObject)) to hoJson
+    Send DataTypeToJson of hoJson tCust
+    Set peWhiteSpace of hoJson to jpWhitespace_Pretty
+    Get Stringify of hoJson to sResult
+    Send Destroy of hoJson
+    Send Info_Box sResult
+End_Procedure
+
+Procedure DemoStruct
+    stCustomer tCust
+    
+    Move 12 to tCust.iId
+    Move "DataAcces" to tCust.sName
+    Move "Miami" to tCust.sCity
+    
+    Move 3 to tCust.aOrders[0].iId
+    Move (DateSet(2024,09,17)) to tCust.aOrders[0].dDate
+    Move 123.99 to tCust.aOrders[0].nTotal
+    
+    Move 1 to tCust.aOrders[1].iId
+    Move (DateSet(2024,09,18)) to tCust.aOrders[1].dDate
+    Move 1236.99 to tCust.aOrders[1].nTotal
+    
+    Move 2 to tCust.aOrders[2].iId
+    Move (DateSet(2024,09,19)) to tCust.aOrders[2].dDate
+    Move 1237.99 to tCust.aOrders[2].nTotal
+    
+    move (SortArray(tCust.aOrders)) to tCust.aOrders
+    Send DisplayCust tCust
+End_Procedure
+
+Send DemoStruct
+```
+
+Osztályok:
+```
+Use DfAllEnt.pkg
+
+Class cPerson is a cObject
+    Procedure Construct_Object
+        Forward Send Construct_Object
+        
+        Property String psFirstname ""
+        Property String psLastname ""
+    End_Procedure
+    
+    Function HelloMessage Returns String
+        String sFirst sLast
+        
+        Get psFirstname to sFirst
+        Get psLastname to sLast
+        
+        Function_Return (sFirst+" "+sLast+" says hi!")
+    End_Function
+    
+    Procedure SayHello
+        String sMsg
+        Get HelloMessage to sMsg
+        Showln sMsg
+    End_Procedure
+End_Class
+
+Class cEmpl is a cPerson
+    Procedure Construct_object
+        Forward Send Construct_Object
+        
+        Property String psFunction ""
+    End_Procedure
+    
+    Function HelloMessage Returns String
+        String sFunction sMsg
+        Forward Get HelloMessage to sMsg
+        
+        Get psFunction to sFunction
+        
+        Function_Return (sFunction+", "+sMsg)
+    End_Function
+End_Class
+
+Object oJohn is a cPerson
+    Set psFirstname to "John"
+    Set psLastname to "Tuohy"
+End_Object
+
+Object oHarm is a cEmpl
+    Set psFirstname to "Harm"
+    Set psLastname to "Wibier"
+    Set psFunction to "CTO"
+End_Object
+
+Procedure DynamicObject
+    Handle hoStephen
+    
+    Get Create (RefClass(cEmpl)) to hoStephen
+    
+    Set psFirstname of hoStephen to "Stephen"
+    Set psLastname of hoStephen to "Meeley"
+    Set psFunction of hoStephen to "COO"
+    
+    Send SayHello of hoStephen
+    
+    Send Destroy of hoStephen
+End_Procedure
+
+Send SayHello of oJohn
+Send SayHello of oHarm
+
+Send DynamicObject
+
+Send Info_Box "Kész"
+```
 
 

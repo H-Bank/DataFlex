@@ -143,9 +143,135 @@ Típusok:
 - Update
 - Delete
 
+INSERT - Létrehozás:
+- Request_Save hatására
+- File puffer megváltozott
+- Nincs rekord (RowID) azonosító
+- DDO fában felfelé hat
+
+INSERT – DD események:
+1. Clear_Main_File: Globális puffer ürítése – Nem relációban lévő tábla pufferének törlése
+2. Creating: Csak ilyen esetben fut le – Lokkolás indul – Érték hozzáadása a lokális pufferhez
+3. Update: Érték módosítása a lokális pufferben
+4. Validate_Save: Megadott adatok ellenőrzése – Hiba esetén rollback + hibaüzenet
+5. Attach_Main_File: Idegen kulcsok karbantartása
+6. Save_Main_File: Tényleges mentés – Lokkolás vége
+7. OnNewCurrentRecord: Minden tranzakció végén lefut
+
+DELETE - Törlés:
+- Request_Delete hatására
+- Van rekord (RowID) azonosító
+- DDO fában mindkét irányba hat
+  - Szülőkben mentés
+  - Gyerekben törlés
+ 
+DELETE – DD események:
+1. Relate_Main_File: Nem relációban lévő adatbázis táblákban kereshetünk
+2. Validate_delete: Adatok ellenőrzése – Lokkolás indul – Hiba esetén rollback + hibaüzenet
+3. Deleting: Csak Request_Delete esetén fut le – értékek hozzáadása a lokális pufferhez
+4. Backout: Globális fájl pufferben a régi adatok találhatóak – adatok módosítása
+5. Delete_Main_File: Tényleges törlés – Lokkolás vége
+6. Clear_Main_File: Pufferek törlése - Nem relációban lévő adatbázis táblák pufferének törlése
+7. OnNewCurrentRecord: Minden tranzakció végén lefut
+
+UPDATE - Módosítás:
+- Request_Save hatására
+- File puffer megváltozott
+- Van rekord (RowID) azonosító
+- DDO fában felfelé hat
+
+UPDATE – DD események:
+1. Relate_Main_File: Nem relációban lévő adatbázis táblákban kereshetünk
+2. Backout: Lokkolás indul – Globális pufferben a régi adatok – adatok módosítása
+3. Update: Lokális pufferben az új adatok – adatok módosítása
+4. Validate_Save: Megadott adatok ellenőrzése – Hiba esetén rollback + hibaüzenet
+5. Save_Main_File: Tényleges mentés – Lokkolás vége
+6. OnNewCurrentRecord: Minden tranzakció végén lefut
+
+DATAFLEX adatbázis tulajdonságok:
+- 15 index: Maximum 15db index definiálható + sorszám hivatkozás
+- Adatbázis: Nincs központi fájl, minden adattáblához külön fájlok
+- Recnum: Rekord azonostó (1NF) nem változtatható futó sorszám
+- Index szegmens: Maximum 16 szegmens – 255 byte
+- Lokkolás: Fájl szintű lokkolás
+- Main index: Elsődlegesen használt index
+
+DataDictionary - Reláció:
+- Összekötöttség – gyerek keresés magával rántja a szülőt is (1:N)
+- Csatlakozások – mentés és keresés előtt a kapcsolt mezők tartalma mindig azonos
+- Kényszerítés – csak az adott adatbázis szelet látható
+- Jóváhagyás és mentés – gyerek mentés esetén az összes szülő vizsgálata és mentése
+
+### Információ
+Riportálás, listák készítése
+
+CÉL: adatból információ legyen
+
+Hol, mire használjuk:
+- Visszakeresés: Könyvelés, egyeztetés
+- Címke: Vonalkód, QR kód
+- Azonosítás: Árut kísérő dokumentum
+- Dashboard, KPI: Vezetői információs pult
+- Ellenőrzés: Leletár
+
+Technológia - ETL:
+1. Extract: Adatok elérése, kivonatolás
+2. Transform: Transzformáció, átalakítás
+3. Load: Betöltés
+
+4Q – modell, Transzformáció:
+- Csoportosítás: Csoportosítandó adatok megadása
+- Összegzés: Csoportosításban szereplő összegek
+- Részletek: Riportban megjelenő alap adatok
+- Szűrés: Adatbázis szelet
+
+Listázási lehetősége:
+- WinPrint: Beépített Windows nyomtatási motorra épül
+- DataFlex Reports: Vizuális riport szerksztő eszköz
+- Dynamic AI: Üzleti intelligencia(BI) eszköz
+
+WinReport:
+- Formázható nyomtató motor, Windows használat
+- BasicReport alosztálya
+- Szöveges lista készítés
+- Karakterek formázása
+- Eredmény: képernyőn megjelenő lista
+- DD-n keresztüli kapcsolat
+- Nem lehet fájlba nyomtatni!
+
+DataFlex Reports:
+- Vizuális, külső szerkesztő felület
+- Közvetlen csatlakozás DB-hez
+- Egymásba ágyazható listák
+- Vonalkód, QR kód generálás
+- Nyomtatás Pdf,Excel,stb. formátumban
+- Külső könyvtár kapcsolat DF-be
+
+Dynamic AI:
+- BI (Business Intelligence) eszköz
+- Webes felületű szekesztő
+- Közvetlen csatlakozás DB-hez
+- Egymásba ágyazható listák
+- Nyomtatás Pdf,Excel,stb. formátumban
+- Monitorozás, automatizálás
+
+WinPrint lista szekciók:
+Page_Top | Minden listában | Minden oldal tetején megjelenik
+Report_Header | Minden listában | Lista elején 1x jelenik csak meg
+Page_Title | Minden listában | Minden oldalon a Page_Top után jelenik meg
+SubHeader_Ini1…N | Csoportosítás esetén | A csoportosított elemek első előfordulásakor, minden listában csak 1x (töréspont)
+Sub_Header1…N | Csoportosítás esetén | A csoportosított elemek első előfordulásakor (töréspont)
+Body | Minden listában | Elemek részletes listája, minden rekord esetén
+Sub_Total1…N | Csoportosítás esetén | A csoportosított elemek utolsó előfordulásakor, összeg képzés
+Total | Csoportosítás esetén | A lista utolsó eleme után, végösszesen képzés, utolsó Sub_Total után
+Page_Total | Csoportosítás esetén | Oldaldobás előtt, összegzés
+Page_Footer | Minden listában | Minden oldal alján, az utolsó oldalon a Page_Total után
+Report_Footer | Minden listában | Listánként csak 1x, az utolsó odalon Page_Total után
+Page_Bottom | Minden listában | Minden oldalon a záró elem
 
 
-##Gyakorlat
+
+## Gyakorlat
 Változók definiálása:
 - String sName sCity sZipCode | Karaktereket tartalmazó változók
 - Number nErtek | Lebegőpontos számok

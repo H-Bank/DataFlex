@@ -256,6 +256,9 @@ Dynamic AI:
 - Monitorozás, automatizálás
 
 WinPrint lista szekciók:
+
+| Kód | leírás | hosszabb leírás |
+| --- | --- | ---|
 | Page_Top | Minden listában | Minden oldal tetején megjelenik |
 | Report_Header | Minden listában | Lista elején 1x jelenik csak meg |
 | Page_Title | Minden listában | Minden oldalon a Page_Top után jelenik meg |

@@ -615,4 +615,60 @@ Send DynamicObject
 Send Info_Box "Kész"
 ```
 
+Adatbázisban alap dolgok lefutásának beállítása:
+```
+    //INSERT
+    //UPDATE
+    Procedure Update
+        Forward Send Update
+        Move (lap.osszdij+(laptetel.menny*laptetel.ar)) to lap.osszdij
+    End_Procedure
+    
+    //UPDATE
+    //DELETE
+    Procedure Backout
+        Forward Send Backout
+        Move (lap.osszdij-(laptetel.menny*laptetel.ar)) to lap.osszdij
+    End_Procedure
+
+    Function Validate_Save Returns Integer
+        Integer iRetVal
+        Forward Get Validate_Save to iRetVal
+        
+        If (not(iRetVal)) Begin
+            If (laptetel.menny<=0) Begin
+                Error 501 "Mennyiség nem lehet 0, vagy negatív szám!"
+                Move 501 to iRetVal
+            End
+            If (laptetel.ar<0) Begin
+                Error 502 "Negatív ár nem rögzíthető!"
+                Move 502 to iRetVal
+            End
+        End
+        
+        
+        
+        Function_Return iRetVal
+    End_Function
+
+    Procedure Creating
+        Forward Send Creating
+        Move (CurrentDateTime()) to laptetel.crdate
+        Move (Idobelyeg(Self)) to laptetel.crido
+    End_Procedure
+
+    Procedure Save_Main_File
+        Boolean bChanged
+        Integer iFile
+        
+        Get Main_File to iFile
+        Get_Attribute DF_FILE_CHANGED of iFile to bChanged
+        If (bChanged) Begin
+            Move (CurrentDateTime()) to laptetel.lmdate
+            Move (Idobelyeg(Self)) to laptetel.lmido
+        End
+        
+        Forward Send Save_Main_File
+    End_Procedure
+```
 

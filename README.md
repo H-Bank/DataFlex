@@ -672,3 +672,57 @@ Adatbázisban alap dolgok lefutásának beállítása:
     End_Procedure
 ```
 
+## zh
+### Workspace létrehpzása
+Dataflex-ben workspace létrehozás
+
+### Projekt létrehozása
+Új projektet a legördülő File (Fájl) menüben, a New (Új), majd a Windows Project (Projekt) pont alatt hozhatunk létre.
+
+### Táblázat létrehozása
+Legördülő View (Nézet) menü Table Explorer (Táblázatböngésző) opciójával, vagy a nézet-eszköztáron elhelyezett gombbal aktiválhatja azt. A lista fölött látható gomb táblázatok készítésére, leejtésére, illetve módosításhoz való megnyitására használható. Ugyanez a funkció az úszó menüben is megtalálható, amelyet jobb egérkattintással nyithat meg a Table Explorer ablakban. Kattintson tehát a Create New Table (Új táblázat létrehozása) gombra (az első gomb), vagy válassza ki a Create New Table lehetőséget az úszó menüből. Ki kell választani a Dataflex Database-t (embedded) és azon belül meg kell adni az adatbázis nevét. Ez után már lehet felvenni oszlopokat, az után indexes megjelenítést majd relationships-et (ha meg lehet már tenni)
+
+#### Data Dictionaries beállítása
+Itt lehet megkötéseket írni az adatbázis oszlopaival kapcsolatban, illetve eventeket létrehozni (létrehozáskor mi történjen stb).
+Fontos beállítások:
+- Capslock
+- Required
+- Protect Value
+- Auto Increment (indexhez)
+- Default Value
+
+Ezenkívül itt lehet még Validation Objects beállítani a megfelelő fülön
+
+### Adatbeviteli nézet
+File-ra, azon belül a New-ra, majd a View / Report (Nézet / Jelentés) opcióra, Data Entry View Wizard
+
+#### Sorrend megváltoztatása
+Code Explorer - kijelölés és a felső gombok
+
+### Autamatikus kulcs
+Plusz táblázat, ahol a növekedő kulcsok vannak. Ahhoz, hogy ebből valóban rendszerfájl legyen, a táblázat DF_FILE_IS_SYSTEM_FILE tulajdonságát állítsa True-ra. 
+
+### Kiválasztási lista
+New (Új), Dialog / Lookup (Párbeszéd / Keresés) opciót, és elindítjuk a Lookup Wizard-ot (Keresés varázslót)
+
+### Mutassa az összes elemet szűrve
+-	Hozzon létre egy új üres nézetet (válassza ki a Data Entry View (Adatbeviteli nézet) sablont).
+-	Használja a DDO Explorer-t a Media és a People kiválasztásához.
+-	Húzza a FirstName-et és a LastName-et a nézetre.
+-	Használja az Object Properties-t a FirstName és a LastName címkék megváltoztatásához.
+-	Igazítsa az objektumokat vízszintesen.
+-	Távolítsa el az azonnal gombot a LastName oszlopból (keresse meg a Prompt_Button_Mode-ot az Object Properties listából, és állítsa PBPromptOff -ra). Ezzel nem távolítja el egészen a keresési listát (még mindig megnyomhatja az F4 gombot, vagy kiválaszthatja a keresést az eszköztárról vagy az úszó menüből), a vizuális útmutatást viszont igen. A keresési lista eltávolításához egy kódsort kellene hozzáadnia a People adatszótár-objektumához. 
+-	Ellenőrizze a DDO Explorer-ben, hogy a szűkítés a People-ra van-e beállítva (lásd a képen). Ha nem így van, a DDO Explorerben az egér jobb gombjával kattintson a Media-táblázatra, és válassza ki az Add/Change (Hozzáadás/Változtatás) szűkítést. Adjon hozzá szűkítést a People-höz (ellenőrizze a Main (Fő) DD-t is), a szerkezete pedig olyan legyen, mint ahogy a jobboldali képen látható.
+-	A fogd-és-vidd segítségével hozzon létre egy cDbCJGrid osztályú objektumot az osztálypalettáról.
+-	A DDO Column Selector-ból (DDO Oszlopválasztóból) húzza a Title, Author és Type oszlopokat a Media-ból a rácsra
+
+### Képek
+-	Nyissa meg az Media táblázatot, ha még nincsen megnyitva, és adjon hozzá egy Picture (Kép) elnevezésű oszlopot. 
+-	A típusa ASCII, a hossza 255 legyen. Maga a kép nem itt kerül tárolásra, azonban minden bejegyzés tartalmazni fog egy, a kép helyére (mappa) és nevére mutató hivatkozást.
+-	Nyissa meg ismét a Media nézetet a Studio-ban, és nagyítsa fel kissé. 
+-	Az osztálypalettában az adatvezérlők között keresse ki a dbBitmap-et, és húzza át a Media nézetre.
+-	Rendelje hozzá a Data Source-ot (Adatforrást) (Beviteli tételt) a Media.Picture oszlophoz a Properties (Tulajdonságok) panelen a Binding (Összekötés) lapfül alatt.
+-	Fordítsa át és indítsa el az alkalmazást (F5).
+
+### Jelentések
+New (Új), View / Report, Winprint2 report wizard
